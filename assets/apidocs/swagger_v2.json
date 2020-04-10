@@ -2,18 +2,17 @@
     "swagger": "2.0",
     "info": {
         "version": "2.0.0",
-        "title": "NOVELCovid/API",
+        "title": "Covid19 API",
         "description": "Covid19 Third Party API for Global Information",
         "license": {
             "name": "GNU V3",
-            "url": "https://github.com/NovelCOVID/API/blob/master/LICENSE"
+            "url": "https://github.com/harishreddy-m/API/blob/master/LICENSE"
         }
     },
     "schemes": [
-        "https",
         "http"
     ],
-    "host": "corona.lmao.ninja",
+    "host": "covid19api.us-east-1.elasticbeanstalk.com",
     "basePath": "/",
     "tags": [{
             "name": "default"
@@ -851,3 +850,5 @@
                 "url": "https://github.com/NovelCovid/API"
             }
         }
+    }
+}
