@@ -24,18 +24,10 @@ app.get('/', async(request, response) => {
     response.redirect('docs');
 });
 
-const listener = app.listen(config.port, () => {
+const listener = app.listen(process.env.PORT || config.port, () => {
     console.log(`Your app is listening on port ${listener.address().port}`);
 });
 
-app.get('/invite', async(req, res) => {
-    /* eslint max-len: off */
-    res.redirect('https://discordapp.com/oauth2/authorize?client_id=685268214435020809&scope=bot&permissions=537250880');
-});
-
-app.get('/support', async(req, res) => {
-    res.redirect('https://discord.gg/EvbMshU');
-});
 
 app.use('/public', express.static('assets'));
 app.use('/docs',
