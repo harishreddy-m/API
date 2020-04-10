@@ -1,5 +1,12 @@
+// NODE PACKAGES
 const Redis = require('ioredis');
-const scraper = require('../scraper');
+
+// LOCAL FUNCTIONS
+const getWorldometerPage = require('../scrapers/getWorldometers');
+const getStates = require('../scrapers/getStates');
+const jhuLocations = require('../scrapers/jhuLocations');
+const historical = require('../scrapers/historical');
+
 let config;
 try {
 	config = require('../config.json');
@@ -15,5 +22,10 @@ const redis = new Redis(config.redis.host, {
 module.exports = {
 	redis,
 	config,
-	scraper
+	scraper: {
+		getWorldometerPage,
+		getStates,
+		jhuLocations,
+		historical
+	}
 };

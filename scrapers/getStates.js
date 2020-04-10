@@ -1,5 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const logger = require('../utils/logger');
 
 const parseStateCell = (cell) => {
 	let state = cell.children[0].data
@@ -18,18 +19,15 @@ const parseStateCell = (cell) => {
 
 const parseNumberCell = (cell) => {
 	const cellValue = cell.children.length !== 0 ? cell.children[0].data : '';
-	return parseFloat(cellValue.replace(/[,+\-\s]/g, ''), 10) || 0;
+	return parseFloat(cellValue.replace(/[,+\-\s]/g, '')) || 0;
 };
 
 const getStates = async (keys, redis) => {
 	let response;
 	try {
 		response = await axios.get('https://www.worldometers.info/coronavirus/country/us/');
-		if (response.status !== 200) {
-			console.log('Error', response.status);
-		}
 	} catch (err) {
-		console.log(err);
+		logger.httpErrorLogger(err, 'error in getState REQUEST');
 		return null;
 	}
 	// to store parsed data
@@ -47,7 +45,9 @@ const getStates = async (keys, redis) => {
 		todayCases: 2,
 		deaths: 3,
 		todayDeaths: 4,
-		active: 5
+		active: 5,
+		tests: 8,
+		testsPerOneMillion: 9
 	};
 
 	tableRows.forEach((row) => {

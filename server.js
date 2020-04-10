@@ -1,14 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
-
 const app = express();
-app.use(cors());
-
-// create redis and scraper instance :O
 const { redis, config, scraper } = require('./routes/instances');
 const { keys } = config;
 
+<<<<<<< HEAD
 const execAll = () => {
     scraper.getWorldometers.getCountries(keys, redis);
     scraper.getWorldometers.getYesterday(keys, redis);
@@ -16,10 +13,23 @@ const execAll = () => {
     scraper.getStates(keys, redis);
     scraper.jhuLocations.jhudataV2(keys, redis);
     scraper.historical.historicalV2(keys, redis);
+=======
+const execAll = async () => {
+	await Promise.all([
+		scraper.getWorldometerPage(keys, redis),
+		scraper.getStates(keys, redis),
+		scraper.jhuLocations.jhudataV2(keys, redis),
+		scraper.historical.historicalV2(keys, redis),
+		scraper.historical.getHistoricalUSADataV2(keys, redis)
+	]);
+	app.emit('scrapper_finished');
+>>>>>>> a7a5b6926aaf313b2b3b8aee7c9073bbd0de4f4e
 };
+
 execAll();
 setInterval(execAll, config.interval);
 
+<<<<<<< HEAD
 app.get('/', async(request, response) => {
     response.redirect('docs');
 });
@@ -28,6 +38,20 @@ const listener = app.listen(process.env.PORT || config.port, () => {
     console.log(`Your app is listening on port ${listener.address().port}`);
 });
 
+=======
+app.use(cors());
+app.get('/', async (request, response) => response.redirect('https://github.com/novelcovid/api'));
+
+const listener = app.listen(config.port, () =>
+	console.log(`Your app is listening on port ${listener.address().port}`)
+);
+
+app.get('/invite', async (req, res) =>
+	res.redirect('https://discordapp.com/oauth2/authorize?client_id=685268214435020809&scope=bot&permissions=537250880')
+);
+
+app.get('/support', async (req, res) => res.redirect('https://discord.gg/EvbMshU'));
+>>>>>>> a7a5b6926aaf313b2b3b8aee7c9073bbd0de4f4e
 
 app.use('/public', express.static('assets'));
 app.use('/docs',
