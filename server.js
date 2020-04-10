@@ -1,40 +1,36 @@
 const express = require('express');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
-
 const app = express();
-app.use(cors());
-
-// create redis and scraper instance :O
 const { redis, config, scraper } = require('./routes/instances');
 const { keys } = config;
 
-const execAll = () => {
-    scraper.getWorldometers.getCountries(keys, redis);
-    scraper.getWorldometers.getYesterday(keys, redis);
-    scraper.getAll(keys, redis);
-    scraper.getStates(keys, redis);
-    scraper.jhuLocations.jhudataV2(keys, redis);
-    scraper.historical.historicalV2(keys, redis);
+const execAll = async() => {
+    await Promise.all([
+        scraper.getWorldometerPage(keys, redis),
+        scraper.getStates(keys, redis),
+        scraper.jhuLocations.jhudataV2(keys, redis),
+        scraper.historical.historicalV2(keys, redis),
+        scraper.historical.getHistoricalUSADataV2(keys, redis)
+    ]);
+    app.emit('scrapper_finished');
 };
+
 execAll();
 setInterval(execAll, config.interval);
 
-app.get('/', async(request, response) => {
-    response.redirect('docs');
-});
+app.use(cors());
 
-const listener = app.listen(process.env.PORT || config.port, () => {
-    console.log(`Your app is listening on port ${listener.address().port}`);
-});
-
+const listener = app.listen(process.env.PORT || config.port, () =>
+    console.log(`Your app is listening on port ${listener.address().port}`)
+);
 
 app.use('/public', express.static('assets'));
-app.use('/docs',
+app.use('/',
     swaggerUi.serve,
     swaggerUi.setup(null, {
         explorer: true,
-        customSiteTitle: 'NovelCOVID 19 API',
+        customSiteTitle: 'COVID 19 API',
         customfavIcon: '/public/virus.png',
         customCssUrl: '/public/apidocs/custom.css',
         swaggerOptions: {

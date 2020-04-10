@@ -6,6 +6,16 @@ const wordsStandardize = (word) => {
 	return 'null';
 };
 
+const wordToBoolean = word => {
+	if (word === '') return true;
+	if (word) return word.toLowerCase() === 'true' || word === '1';
+	return false;
+};
+
+const splitQuery = (query) => query.indexOf('|') === -1 ? query.split(',') : query.split('|');
+
 module.exports = {
-	wordsStandardize
+	wordsStandardize,
+	wordToBoolean,
+	splitQuery
 };
