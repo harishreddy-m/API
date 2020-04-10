@@ -1,24 +1,3 @@
-![GitHub contributors](https://img.shields.io/github/contributors-anon/novelcovid/api?style=for-the-badge)
-![ESLint](https://img.shields.io/github/workflow/status/NovelCOVID/API/Eslint?label=ESLint&style=for-the-badge)
-![Tests](https://img.shields.io/github/workflow/status/NovelCOVID/API/Unittest?label=Tests&style=for-the-badge)
-![GitHub top language](https://img.shields.io/github/languages/top/novelcovid/api?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/novelcovid/api?style=for-the-badge)
-![GitHub closed issues](https://img.shields.io/github/issues-closed/novelcovid/api?style=for-the-badge)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/novelcovid/api?style=for-the-badge)
-![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/novelcovid/api?style=for-the-badge)
-![Discord](https://img.shields.io/discord/689535536934813823?style=for-the-badge)
-# Join our Server!
-[![Discord server](https://discordapp.com/api/guilds/689535536934813823/embed.png?style=banner4)](https://discord.gg/EvbMshU)
-
-# API
-API for Current cases and more stuff about COVID-19 or the Novel Coronavirus Strain
-https://corona.lmao.ninja/
-
-# Recommended by Postman
-NovelCovid API is recommended by Postman [here](https://covid-19-apis.postman.com/)
-
-# Documentation
-NovelCovid/API Documentation can be found [here](https://corona.lmao.ninja/docs/)
 
 ## Installation
 
