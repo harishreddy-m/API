@@ -25,8 +25,12 @@ const listener = app.listen(process.env.PORT || config.port, () =>
     console.log(`Your app is listening on port ${listener.address().port}`)
 );
 
+app.get('/', async(request, response) => {
+    response.redirect('docs');
+});
+
 app.use('/public', express.static('assets'));
-app.use('/',
+app.use('/docs',
     swaggerUi.serve,
     swaggerUi.setup(null, {
         explorer: true,
