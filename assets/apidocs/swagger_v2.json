@@ -12,7 +12,7 @@
     "schemes": [
         "http"
     ],
-    "host": "covid19api.us-east-1.elasticbeanstalk.com",
+    "host": "covid19.sgmoid.com",
     "basePath": "/",
     "tags": [{
             "name": "default"
